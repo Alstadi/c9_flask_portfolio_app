@@ -46,9 +46,8 @@ def shopping_list_post():
 
         shop_list = []
         try:
-            for item in request.form['text'].split():
-                for item2 in item.split(','):
-                    shop_list.append(item2)
+            for item in request.form['text'].replace(',', ' ').split():
+                shop_list.append(item)
 
             return render_template('shopping_list.html', result=", ".join([str(item) for item in shop_list]))
         except ValueError:
