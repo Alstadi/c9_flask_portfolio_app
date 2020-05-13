@@ -47,9 +47,10 @@ def shopping_list_post():
         shop_list = []
         try:
             for item in request.form['text'].split():
-                shop_list.append(item)
+                for item2 in item.split(','):
+                    shop_list.append(item2)
 
-            return render_template('shopping_list.html', result="\n".join([str(item) for item in shop_list]))
+            return render_template('shopping_list.html', result="\n".join([(str(item) + "\n") for item in shop_list]))
         except ValueError:
             return "Easy now! Let's keep it simple! Just words with a space between them"
 
